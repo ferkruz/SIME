@@ -1,0 +1,114 @@
+<c-container [fluid]="true" class="min-vh-100 bg-light">
+  <!-- NAVBAR SUPERIOR -->
+  <c-navbar class="bg-dark navbar-dark px-3 mb-4 d-flex justify-content-between">
+    <h5 class="text-white mb-0">🏛️ CoreUI Dashboard</h5>
+    <button class="btn btn-outline-light btn-sm" (click)="toggleSidebar()">
+      {{ sidebarVisible ? 'Ocultar' : 'Mostrar' }} Sidebar
+    </button>
+  </c-navbar>
+
+  <div class="d-flex">
+    <!-- SIDEBAR -->
+    <c-sidebar *ngIf="sidebarVisible" class="bg-body border-end p-3" style="width: 250px;">
+      <h6 class="text-uppercase fw-bold text-secondary mb-3">Menú</h6>
+      <ul class="list-unstyled">
+        <li><a href="#" class="d-block py-2 text-decoration-none">🏠 Inicio</a></li>
+        <li><a href="#" class="d-block py-2 text-decoration-none">📊 Reportes</a></li>
+        <li><a href="#" class="d-block py-2 text-decoration-none">⚙️ Configuración</a></li>
+      </ul>
+
+      <hr />
+      <c-card class="bg-primary text-white text-center">
+        <c-card-header>Usuarios activos</c-card-header>
+        <c-card-body>
+          <h3 class="fw-bold mb-0">128</h3>
+        </c-card-body>
+      </c-card>
+    </c-sidebar>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="flex-grow-1 p-4">
+      <c-row class="g-4">
+        <c-col [xs]="12" [md]="4">
+          <c-card class="border-success">
+            <c-card-header class="bg-success text-white">Ventas Hoy</c-card-header>
+            <c-card-body>
+              <h4>$5,240</h4>
+              <p class="text-muted mb-0">+12% respecto a ayer</p>
+            </c-card-body>
+          </c-card>
+        </c-col>
+
+        <c-col [xs]="12" [md]="4">
+          <c-card class="border-info">
+            <c-card-header class="bg-info text-white">Usuarios Nuevos</c-card-header>
+            <c-card-body>
+              <h4>37</h4>
+              <p class="text-muted mb-0">En las últimas 24 horas</p>
+            </c-card-body>
+          </c-card>
+        </c-col>
+
+        <c-col [xs]="12" [md]="4">
+          <c-card class="border-warning">
+            <c-card-header class="bg-warning text-dark">Tickets Pendientes</c-card-header>
+            <c-card-body>
+              <h4>9</h4>
+              <p class="text-muted mb-0">Atención requerida</p>
+            </c-card-body>
+          </c-card>
+        </c-col>
+      </c-row>
+
+      <!-- ALERTAS -->
+      <div class="mt-4">
+        <c-alert color="info" class="d-flex align-items-center">
+          <strong class="me-2">ℹ️ Info:</strong> Nueva actualización del sistema disponible.
+        </c-alert>
+
+        <c-alert color="warning" class="d-flex align-items-center">
+          <strong class="me-2">⚠️ Aviso:</strong> Algunos servicios estarán en mantenimiento esta noche.
+        </c-alert>
+      </div>
+
+      <!-- TABLA -->
+      <div class="mt-4">
+        <c-card>
+          <c-card-header class="fw-bold">Actividad Reciente</c-card-header>
+          <c-card-body>
+            <table class="table table-hover align-middle">
+              <thead class="table-light">
+                <tr>
+                  <th>#</th>
+                  <th>Usuario</th>
+                  <th>Acción</th>
+                  <th>Estado</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Fernando Cruz</td>
+                  <td>Inicio de sesión</td>
+                  <td><span class="badge text-bg-success">Completado</span></td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Ana Gómez</td>
+                  <td>Actualizó perfil</td>
+                  <td><span class="badge text-bg-info">En proceso</span></td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>Juan Pérez</td>
+                  <td>Intento fallido</td>
+                  <td><span class="badge text-bg-danger">Error</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </c-card-body>
+        </c-card>
+      </div>
+    </div>
+  </div>
+</c-container>
