@@ -1,3 +1,26 @@
 //@import "bootstrap/dist/css/bootstrap.min.css";
 @import "bootstrap-icons/font/bootstrap-icons.css";
 /* You can add global styles to this file, and also import other style files */
+
+#initial-loader {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f8f9fa; /* fondo tipo Bootstrap */
+  z-index: 9999;
+}
+
+.spinner {
+  width: 3rem;
+  height: 3rem;
+  border: 0.4rem solid #dee2e6;
+  border-top-color: #0d6efd; /* color primario de Bootstrap */
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
