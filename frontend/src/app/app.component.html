@@ -1,21 +1,6 @@
-<!-- <div class="container mt-5">
-  <div class="card shadow-sm">
-    <div class="card-header bg-primary text-white">
-      <h4 class="mb-0">Bootstrap Test</h4>
-    </div>
-    <div class="card-body">
-      <p class="card-text">
-        Si ves esta tarjeta con colores y márgenes bonitos, Bootstrap está funcionando 🎉
-      </p>
-      <button class="btn btn-success">Botón de prueba</button>
-    </div>
-  </div>
-</div> -->
-<router-outlet></router-outlet>
-
 <nav class="navbar navbar-expand-lg bg-white border-bottom border-light-subtle sticky-top">
   <div class="container">
-    <a class="navbar-brand fw-bold fs-5" href="#/">
+    <a class="navbar-brand fw-bold fs-5" routerLink="/">
       <span class="text-primary">SIME</span>c&s
     </a>
 
@@ -27,16 +12,16 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto gap-2">
         <li class="nav-item">
-          <a class="nav-link" href="#/">Inicio</a>
+          <a class="nav-link" routerLink="/">Inicio</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#/">Servicios</a>
+          <a class="nav-link" routerLink="/coreUIKit">UI Kit</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#/">Sobre Nosotros</a>
+          <a class="nav-link" routerLink="/pdfMaker">Generador PDF</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#/">Contacto</a>
+          <a class="nav-link" routerLink="/dashboard">Dashboard</a>
         </li>
       </ul>
 
@@ -59,33 +44,28 @@
   </div>
 </nav>
 
+<router-outlet></router-outlet>
+
 <footer class="bg-white text-white mt-auto">
   <div class="container py-5">
     <div class="row g-4">
-      <!-- Sobre -->
-      <div class="col-12 col-md-4">
-        <h5 class="fw-bold mb-3">YourBrand</h5>
-        <p class="small text-body-secondary">Soluciones innovadoras para tu negocio. Crecemos juntos hacia el éxito.</p>
-      </div>
-
-      <!-- Enlaces -->
+      
       <div class="col-12 col-md-4">
         <h5 class="fw-bold mb-3">Enlaces</h5>
         <ul class="list-unstyled">
-          <li><a href="#/" class="text-decoration-none text-body-secondary small">Inicio</a></li>
-          <li><a href="#/" class="text-decoration-none text-body-secondary small">Servicios</a></li>
-          <li><a href="#/" class="text-decoration-none text-body-secondary small">Blog</a></li>
-          <li><a href="#/" class="text-decoration-none text-body-secondary small">Contacto</a></li>
+          <li><a routerLink="/" class="text-decoration-none text-body-secondary small">Inicio</a></li>
+          <li><a routerLink="/coreUIKit" class="text-decoration-none text-body-secondary small">UI Kit</a></li>
+          <li><a routerLink="/pdfMaker" class="text-decoration-none text-body-secondary small">Generador PDF</a></li>
+          <li><a routerLink="/dashboard" class="text-decoration-none text-body-secondary small">Dashboard</a></li>
         </ul>
       </div>
 
-      <!-- Redes Sociales -->
       <div class="col-12 col-md-4">
         <h5 class="fw-bold mb-3">Síguenos</h5>
         <div class="d-flex gap-3">
-          <a href="#/" class="text-body-secondary text-decoration-none">Twitter</a>
-          <a href="#/" class="text-body-secondary text-decoration-none">LinkedIn</a>
-          <a href="#/" class="text-body-secondary text-decoration-none">Facebook</a>
+          <a href="#" class="text-body-secondary text-decoration-none">Twitter</a>
+          <a href="#" class="text-body-secondary text-decoration-none">LinkedIn</a>
+          <a href="#" class="text-body-secondary text-decoration-none">Facebook</a>
         </div>
       </div>
     </div>
@@ -93,12 +73,9 @@
     <hr class="border-secondary my-4">
 
     <div class="row">
-      <div class="col-12 col-md-6">
-        <p class="small text-body-secondary mb-0">© 2025 YourBrand. Todos los derechos reservados.</p>
-      </div>
       <div class="col-12 col-md-6 text-md-end">
-        <a href="#/" class="text-body-secondary text-decoration-none small me-3">Privacidad</a>
-        <a href="#/" class="text-body-secondary text-decoration-none small">Términos</a>
+        <a href="#" class="text-body-secondary text-decoration-none small me-3">Privacidad</a>
+        <a href="#" class="text-body-secondary text-decoration-none small">Términos</a>
       </div>
     </div>
   </div>

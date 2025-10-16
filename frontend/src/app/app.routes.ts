@@ -8,7 +8,7 @@ import { DashboardComponent } from './features/dashboard/dashboard/dashboard.com
 import { AuthGuard } from './core/guards/auth.guard';
 
 export const routes: Route[] = [
-  { path: '', component: AppComponent, pathMatch: 'full' },
+  //{ path: '', component: AppComponent, pathMatch: 'full' },
   { path: 'coreUIKit', component: CoreUiDashboardComponent },
   { path: 'pdfMaker', component: PdfMakerComponent },
 
@@ -16,4 +16,3 @@ export const routes: Route[] = [
   { path: 'mfa', component: MfaVerificationComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
 ];
-
