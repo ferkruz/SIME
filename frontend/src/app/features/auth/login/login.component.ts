@@ -1,25 +1,27 @@
-import { Component, signal } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
 import { AuthService } from '../../../core/services/auth.service';
-import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MfaVerificationComponent } from '../mfa-verification/mfa-verification.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [CommonModule, FormsModule, MfaVerificationComponent],
   template: `
-    <div class="container mt-5">
+    <div class="container mt-5 text-center">
       <div class="card p-4 mx-auto" style="max-width: 400px;">
-        <h3 class="text-center mb-3">Login</h3>
-        <div class="mb-2">
-          <input [(ngModel)]="email" placeholder="Email" class="form-control" />
-        </div>
-        <div class="mb-2">
-          <input [(ngModel)]="password" type="password" placeholder="Password" class="form-control" />
-        </div>
-        <button (click)="login()" class="btn btn-primary w-100">Ingresar</button>
-        <div *ngIf="error()" class="alert alert-danger mt-3">{{ error() }}</div>
+        <h3 class="mb-3">Login Mock</h3>
+        <form *ngIf="!authService.isMfaRequired()" (ngSubmit)="submit()">
+          <input [(ngModel)]="email" name="email" placeholder="Email" class="form-control mb-2" required />
+          <input [(ngModel)]="password" name="password" placeholder="Password" type="password" class="form-control mb-2" required />
+          <button type="submit" class="btn btn-primary w-100">Login</button>
+        </form>
+
+        <app-mfa-verification *ngIf="authService.isMfaRequired()"></app-mfa-verification>
+
+        <div class="mt-3" *ngIf="authService.isLoggedIn()">✅ Sesión activa</div>
+        <pre class="text-start mt-3 bg-light p-2 small" *ngIf="authService.token()">{{ authService.token() }}</pre>
       </div>
     </div>
   `
@@ -27,21 +29,14 @@ import { CommonModule } from '@angular/common';
 export class LoginComponent {
   email = '';
   password = '';
-  error = signal<string | null>(null);
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(public authService: AuthService) {}
 
-  login() {
-    this.error.set(null);
-    this.authService.login(this.email, this.password).subscribe({
-      next: res => {
-        if (res.mfaRequired) {
-          this.router.navigate(['/mfa'], { queryParams: { userId: res.userId } });
-        } else {
-          this.router.navigate(['/dashboard']);
-        }
-      },
-      error: err => this.error.set(err.message)
-    });
+  submit() {
+    try {
+      this.authService.login(this.email, this.password);
+    } catch (e: any) {
+      alert(e.message);
+    }
   }
 }

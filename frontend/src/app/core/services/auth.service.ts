@@ -1,65 +1,82 @@
 import { Injectable, signal, effect } from '@angular/core';
-import { Router } from '@angular/router';
-import { Observable, of, throwError } from 'rxjs';
-import { delay } from 'rxjs/operators';
-import { LoginResponse } from '../../shared/models/auth';
-import { User } from '../../shared/models/user';
 
-@Injectable({
-  providedIn: 'root'
-})
+export interface User {
+  email: string;
+  name: string;
+  mfaEnabled: boolean;
+}
+
+@Injectable({ providedIn: 'root' })
 export class AuthService {
-  private mockUsers: User[] = [
-    { id: '1', email: 'user@demo.com', name: 'Usuario Demo', mfaEnabled: false },
-    { id: '2', email: 'admin@demo.com', name: 'Administrador MFA', mfaEnabled: true }
-  ];
-
+  isLoggedIn = signal(false);
+  isMfaRequired = signal(false);
+  user = signal<User | null>(null);
   token = signal<string | null>(null);
-  isLoggedIn = signal<boolean>(false);
 
-  constructor(private router: Router) {
-    // inicializar signals desde localStorage SOLO en navegador
+  private mockUsers: User[] = [
+    { email: 'user@demo.com', name: 'Usuario Demo', mfaEnabled: false },
+    { email: 'admin@demo.com', name: 'Admin MFA', mfaEnabled: true }
+  ];
+  private password = '123456';
+
+  constructor() {
     if (typeof window !== 'undefined') {
-      const stored = localStorage.getItem('token');
-      this.token.set(stored);
-      this.isLoggedIn.set(!!stored);
-    }
-
-    effect(() => {
-      if (typeof window === 'undefined') return;
-      const t = this.token();
-      if (t) {
-        localStorage.setItem('token', t);
+      // Recuperar sesión desde localStorage
+      const storedToken = localStorage.getItem('token');
+      const storedUser = localStorage.getItem('user');
+      if (storedToken && storedUser) {
+        this.token.set(storedToken);
+        this.user.set(JSON.parse(storedUser));
         this.isLoggedIn.set(true);
-      } else {
-        localStorage.removeItem('token');
-        this.isLoggedIn.set(false);
       }
-    });
+
+      // Sincronizar signals con localStorage
+      effect(() => {
+        if (this.isLoggedIn()) {
+          localStorage.setItem('token', this.token() || '');
+          localStorage.setItem('user', JSON.stringify(this.user()));
+        } else {
+          localStorage.removeItem('token');
+          localStorage.removeItem('user');
+        }
+      });
+    }
   }
 
-  login(email: string, password: string): Observable<LoginResponse> {
-    const user = this.mockUsers.find(u => u.email === email);
-    if (!user || password !== '123456') {
-      return throwError(() => new Error('Credenciales inválidas'));
+  login(email: string, password: string) {
+    const found = this.mockUsers.find(u => u.email === email);
+    if (!found || password !== this.password) {
+      throw new Error('Credenciales inválidas');
     }
 
-    if (user.mfaEnabled) {
-      return of({ mfaRequired: true, userId: user.id }).pipe(delay(500));
+    if (found.mfaEnabled) {
+      this.user.set(found);
+      this.isMfaRequired.set(true);
     } else {
-      const fakeToken = this.generateFakeJwt(user);
-      this.token.set(fakeToken);
-      return of({ mfaRequired: false, token: fakeToken }).pipe(delay(500));
+      this.user.set(found);
+      this.isLoggedIn.set(true);
+      this.token.set(this.generateToken(found));
+    }
+  }
+
+  verifyMfa(code: string) {
+    if (code === '123456') {
+      this.isMfaRequired.set(false);
+      this.isLoggedIn.set(true);
+      if (this.user()) this.token.set(this.generateToken(this.user()!));
+    } else {
+      throw new Error('Código MFA inválido');
     }
   }
 
   logout() {
+    this.isLoggedIn.set(false);
+    this.user.set(null);
     this.token.set(null);
-    this.router.navigate(['/login']);
+    this.isMfaRequired.set(false);
   }
 
-  private generateFakeJwt(user: User): string {
-    const payload = btoa(JSON.stringify({ sub: user.id, name: user.name, email: user.email }));
-    return `fake-header.${payload}.fake-signature`;
+  private generateToken(user: User) {
+    return btoa(JSON.stringify({ email: user.email, name: user.name }));
   }
 }
