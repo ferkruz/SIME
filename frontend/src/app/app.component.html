@@ -1,4 +1,4 @@
-<div class="container mt-5">
+<!-- <div class="container mt-5">
   <div class="card shadow-sm">
     <div class="card-header bg-primary text-white">
       <h4 class="mb-0">Bootstrap Test</h4>
@@ -10,6 +10,96 @@
       <button class="btn btn-success">Botón de prueba</button>
     </div>
   </div>
-</div>
-<app-bootstrap-table></app-bootstrap-table>
+</div> -->
 <router-outlet></router-outlet>
+
+<nav class="navbar navbar-expand-lg bg-white border-bottom border-light-subtle sticky-top">
+  <div class="container">
+    <a class="navbar-brand fw-bold fs-5" href="#/">
+      <span class="text-primary">SIME</span>c&s
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto gap-2">
+        <li class="nav-item">
+          <a class="nav-link" href="#/">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#/">Servicios</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#/">Sobre Nosotros</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#/">Contacto</a>
+        </li>
+      </ul>
+
+      <div class="d-flex align-items-center gap-3 ms-3 ms-lg-4">
+        <div class="d-flex align-items-center gap-2 text-truncate">
+          <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center"
+            style="width: 36px; height: 36px; flex-shrink: 0;">
+            <span class="fw-bold">JD</span>
+          </div>
+          <div class="d-none d-md-block text-truncate">
+            <div class="fw-500 small">John Doe</div>
+            <div class="text-muted small">userName</div>
+          </div>
+        </div>
+        <button class="btn btn-sm btn-outline-primary rounded-pill">
+          Salir
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<footer class="bg-white text-white mt-auto">
+  <div class="container py-5">
+    <div class="row g-4">
+      <!-- Sobre -->
+      <div class="col-12 col-md-4">
+        <h5 class="fw-bold mb-3">YourBrand</h5>
+        <p class="small text-body-secondary">Soluciones innovadoras para tu negocio. Crecemos juntos hacia el éxito.</p>
+      </div>
+
+      <!-- Enlaces -->
+      <div class="col-12 col-md-4">
+        <h5 class="fw-bold mb-3">Enlaces</h5>
+        <ul class="list-unstyled">
+          <li><a href="#/" class="text-decoration-none text-body-secondary small">Inicio</a></li>
+          <li><a href="#/" class="text-decoration-none text-body-secondary small">Servicios</a></li>
+          <li><a href="#/" class="text-decoration-none text-body-secondary small">Blog</a></li>
+          <li><a href="#/" class="text-decoration-none text-body-secondary small">Contacto</a></li>
+        </ul>
+      </div>
+
+      <!-- Redes Sociales -->
+      <div class="col-12 col-md-4">
+        <h5 class="fw-bold mb-3">Síguenos</h5>
+        <div class="d-flex gap-3">
+          <a href="#/" class="text-body-secondary text-decoration-none">Twitter</a>
+          <a href="#/" class="text-body-secondary text-decoration-none">LinkedIn</a>
+          <a href="#/" class="text-body-secondary text-decoration-none">Facebook</a>
+        </div>
+      </div>
+    </div>
+
+    <hr class="border-secondary my-4">
+
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <p class="small text-body-secondary mb-0">© 2025 YourBrand. Todos los derechos reservados.</p>
+      </div>
+      <div class="col-12 col-md-6 text-md-end">
+        <a href="#/" class="text-body-secondary text-decoration-none small me-3">Privacidad</a>
+        <a href="#/" class="text-body-secondary text-decoration-none small">Términos</a>
+      </div>
+    </div>
+  </div>
+</footer>

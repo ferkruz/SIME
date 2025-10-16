@@ -2,15 +2,19 @@
   <!-- NAVBAR SUPERIOR -->
   <c-navbar class="bg-dark navbar-dark px-3 mb-4 d-flex justify-content-between">
     <h5 class="text-white mb-0">🏛️ CoreUI Dashboard</h5>
-    <button class="btn btn-outline-light btn-sm" (click)="toggleSidebar()">
-      {{ sidebarVisible ? 'Ocultar' : 'Mostrar' }} Sidebar
+    <button class="btn btn-outline-primary btn-sm d-flex align-items-center" (click)="toggleSidebar()">
+      <i class="bi bi-menu-button-wide me-2"></i> Menú
     </button>
+
+
   </c-navbar>
 
   <div class="d-flex">
     <!-- SIDEBAR -->
-    <c-sidebar *ngIf="sidebarVisible" class="bg-body border-end p-3" style="width: 250px;">
-      <h6 class="text-uppercase fw-bold text-secondary mb-3">Menú</h6>
+    <c-sidebar *ngIf="sidebarVisible()" class="bg-body border-end p-3" style="width: 250px;">
+      <h6 class="text-uppercase fw-bold text-primary mb-3 border-start border-4 ps-2" style="border-color: #0d6efd;">
+        <i class="bi bi-menu-button-wide me-2"></i> Menú
+      </h6>
       <ul class="list-unstyled">
         <li><a href="#" class="d-block py-2 text-decoration-none">🏠 Inicio</a></li>
         <li><a href="#" class="d-block py-2 text-decoration-none">📊 Reportes</a></li>
@@ -62,14 +66,113 @@
 
       <!-- ALERTAS -->
       <div class="mt-4">
-        <c-alert color="info" class="d-flex align-items-center">
-          <strong class="me-2">ℹ️ Info:</strong> Nueva actualización del sistema disponible.
-        </c-alert>
 
-        <c-alert color="warning" class="d-flex align-items-center">
-          <strong class="me-2">⚠️ Aviso:</strong> Algunos servicios estarán en mantenimiento esta noche.
-        </c-alert>
+        <!-- ALERTAS DE COLORES VARIANTES DE COREUI -->
+        <div class="mt-4 d-flex flex-column gap-2">
+          <c-alert color="primary" class="d-flex align-items-center">
+            <strong class="me-2">🔵 Primary:</strong> Este es un mensaje de alerta primaria.
+          </c-alert>
+
+          <c-alert color="secondary" class="d-flex align-items-center">
+            <strong class="me-2">⚪ Secondary:</strong> Este es un mensaje de alerta secundaria.
+          </c-alert>
+
+          <c-alert color="success" class="d-flex align-items-center">
+            <strong class="me-2">✅ Success:</strong> Este es un mensaje de alerta de éxito.
+          </c-alert>
+
+          <c-alert color="danger" class="d-flex align-items-center">
+            <strong class="me-2">❌ Danger:</strong> Este es un mensaje de alerta de peligro.
+          </c-alert>
+
+          <c-alert color="warning" class="d-flex align-items-center">
+            <strong class="me-2">⚠️ Warning:</strong> Este es un mensaje de alerta de advertencia.
+          </c-alert>
+
+          <c-alert color="info" class="d-flex align-items-center">
+            <strong class="me-2">ℹ️ Info:</strong> Este es un mensaje de alerta informativa.
+          </c-alert>
+
+          <c-alert color="light" class="d-flex align-items-center border">
+            <strong class="me-2">🌕 Light:</strong> Este es un mensaje de alerta clara.
+          </c-alert>
+
+          <c-alert color="dark" class="d-flex align-items-center">
+            <strong class="me-2">🌑 Dark:</strong> Este es un mensaje de alerta oscura.
+          </c-alert>
+
+          <c-alert *ngIf="showDark()" color="dark" dismissible="true" (close)="showDark.set(false)">
+            <strong class="me-2">🌑 Dark:</strong> Este es un mensaje de alerta oscura.
+          </c-alert>
+        </div>
+
       </div>
+
+      <!-- BOTONES -->
+      <div class="d-flex flex-wrap gap-2 mb-4">
+        <button cButton color="primary">Primary</button>
+        <button cButton color="secondary">Secondary</button>
+        <button cButton color="success">Success</button>
+        <button cButton color="danger">Danger</button>
+        <button cButton color="warning">Warning</button>
+        <button cButton color="info">Info</button>
+        <button cButton color="light">Light</button>
+        <button cButton color="dark">Dark</button>
+        <button cButton color="link">Link</button>
+        <button cButton color="primary" size="sm">Primary Small</button>
+        <button cButton color="primary" size="lg">Primary Large</button>
+        <button cButton color="outline-primary">Outline Primary</button>
+        <button cButton color="outline-success">Outline Success</button>
+        <button cButton color="outline-danger">Outline Danger</button>
+      </div>
+
+      <!-- UI Kit de Íconos CoreUI -->
+      <div class="d-flex flex-wrap gap-3 mt-4">
+        <div class="text-center">
+          <i class="bi bi-house-fill fs-3"></i>
+          <div class="small mt-1">Inicio</div>
+        </div>
+
+        <div class="text-center">
+          <i class="bi bi-people-fill fs-3"></i>
+          <div class="small mt-1">Usuarios</div>
+        </div>
+
+        <div class="text-center">
+          <i class="bi bi-graph-up fs-3"></i>
+          <div class="small mt-1">Reportes</div>
+        </div>
+
+        <div class="text-center">
+          <i class="bi bi-gear-fill fs-3"></i>
+          <div class="small mt-1">Configuración</div>
+        </div>
+
+        <div class="text-center">
+          <i class="bi bi-bell-fill fs-3"></i>
+          <div class="small mt-1">Notificaciones</div>
+        </div>
+
+        <div class="text-center">
+          <i class="bi bi-envelope-fill fs-3"></i>
+          <div class="small mt-1">Mensajes</div>
+        </div>
+
+        <div class="text-center">
+          <i class="bi bi-calendar-event-fill fs-3"></i>
+          <div class="small mt-1">Calendario</div>
+        </div>
+
+        <div class="text-center">
+          <i class="bi bi-file-earmark-text-fill fs-3"></i>
+          <div class="small mt-1">Documentos</div>
+        </div>
+      </div>
+
+
+      <!--cards-->
+
+
 
       <!-- TABLA -->
       <div class="mt-4">
@@ -108,6 +211,92 @@
             </table>
           </c-card-body>
         </c-card>
+
+
+        <!-- GRÁFICO DE BARRAS -->
+        <div class="mt-4">
+          <c-row>
+            <c-col>
+              <c-card>
+                <c-card-header>Gráfico de Ventas</c-card-header>
+                <c-card-body>
+                  <c-chart type="bar" [data]="barData" [options]="barOptions" width="400" height="200">
+                  </c-chart>
+                </c-card-body>
+              </c-card>
+            </c-col>
+          </c-row>
+        </div>
+
+        <!-- GRÁFICO DE PUNTOS -->
+        <div class="mt-4">
+          <c-row>
+            <c-col>
+              <c-card>
+                <c-card-header>Gráfico de Puntos</c-card-header>
+                <c-card-body>
+                  <c-chart type="scatter" [data]="scatterData" [options]="scatterOptions" width="400"
+                    height="200"></c-chart>
+                </c-card-body>
+              </c-card>
+            </c-col>
+          </c-row>
+        </div>
+
+        <!-- GRÁFICO DE TARTA -->
+        <div class="mt-4">
+          <c-row>
+            <c-col>
+              <c-card>
+                <c-card-header>Distribución de Ventas</c-card-header>
+                <c-card-body>
+                  <c-chart type="pie" [data]="pieData" [options]="pieOptions" width="400" height="200">
+                  </c-chart>
+                </c-card-body>
+              </c-card>
+            </c-col>
+          </c-row>
+        </div>
+
+        <!-- GRÁFICO DE LÍNEAS -->
+<div class="mt-4">
+  <c-row>
+    <c-col>
+      <c-card>
+        <c-card-header>Ingresos Mensuales</c-card-header>
+        <c-card-body>
+          <c-chart type="line" [data]="lineData" [options]="lineOptions" width="400" height="200">
+          </c-chart>
+        </c-card-body>
+      </c-card>
+    </c-col>
+  </c-row>
+</div>
+
+<div class="mt-4">
+  <c-row>
+    <c-col>
+      <c-card>
+        <c-card-header>Presupuestos Mensuales por Ministerio</c-card-header>
+        <c-card-body>
+          <c-chart
+            type="bar"
+            [data]="presupuestosData"
+            [options]="presupuestosOptions"
+            width="600"
+            height="300"
+          ></c-chart>
+        </c-card-body>
+      </c-card>
+    </c-col>
+  </c-row>
+</div>
+
+
+
+
+
+
       </div>
     </div>
   </div>

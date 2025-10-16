@@ -4,7 +4,7 @@ import { BootstrapTableComponent } from './shared/components/bootstrap-table/boo
 
 @Component({
   selector: 'app-root',
-  imports: [ BootstrapTableComponent, RouterOutlet],
+  imports: [ RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
