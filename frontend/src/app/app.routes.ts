@@ -1,18 +1,32 @@
 import { Route } from '@angular/router';
-import { CoreUiDashboardComponent } from './pages/coreUIKit/core-ui-dashboard/core-ui-dashboard.component';
-import { AppComponent } from './app.component';
-import { PdfMakerComponent } from './pages/pdf-maker/pdf-maker.component';
-import { LoginComponent } from './features/auth/login/login.component';
-import { MfaVerificationComponent } from './features/auth/mfa-verification/mfa-verification.component';
-import { DashboardComponent } from './features/dashboard/dashboard/dashboard.component';
 import { AuthGuard } from './core/guards/auth.guard';
 
 export const routes: Route[] = [
-  //{ path: '', component: AppComponent, pathMatch: 'full' },
-  { path: 'coreUIKit', component: CoreUiDashboardComponent },
-  { path: 'pdfMaker', component: PdfMakerComponent },
-
-  { path: 'login', component: LoginComponent },
-  { path: 'mfa', component: MfaVerificationComponent },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  
+  // Rutas con lazy loading
+  { 
+    path: 'login', 
+    loadComponent: () => import('./features/auth/login/login.component').then(m => m.LoginComponent)
+  },
+  { 
+    path: 'mfa', 
+    loadComponent: () => import('./features/auth/mfa-verification/mfa-verification.component').then(m => m.MfaVerificationComponent)
+  },
+  { 
+    path: 'dashboard', 
+    loadComponent: () => import('./features/dashboard/dashboard/dashboard.component').then(m => m.DashboardComponent),
+    canActivate: [AuthGuard]
+  },
+  { 
+    path: 'coreUIKit', 
+    loadComponent: () => import('./pages/coreUIKit/core-ui-dashboard/core-ui-dashboard.component').then(m => m.CoreUiDashboardComponent)
+  },
+  { 
+    path: 'pdfMaker', 
+    loadComponent: () => import('./pages/pdf-maker/pdf-maker.component').then(m => m.PdfMakerComponent)
+  },
+  
+  // Ruta wildcard para 404
+  { path: '**', redirectTo: '/login' }
 ];
