@@ -1,0 +1,9 @@
+{
+  "apiBaseUrl": "https://api.sime.gob.ar/login",
+  "cysBaseUrl": "https://api.sime.gob.ar/cys",
+  "reCaptchaPublicKey": "TU_CLAVE_PUBLICA_PROD",
+  "featureFlags": {
+    "enableMFA": true,
+    "enableAuditLog": true
+  }
+}

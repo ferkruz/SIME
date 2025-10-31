@@ -1,0 +1,9 @@
+{
+  "apiBaseUrl": "http://localhost:3000/mock-login",
+  "cysBaseUrl": "http://localhost:3000/cys",
+  "reCaptchaPublicKey": "TU_CLAVE_PUBLICA_MOCK",
+  "featureFlags": {
+    "enableMFA": true,
+    "enableAuditLog": true
+  }
+}
